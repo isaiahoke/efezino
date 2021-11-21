@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +16,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return "hello Welcome";//view('welcome');
+Route::get('/',[HomeController::class, 'index']);
+
+Route::get('/about',[HomeController::class, 'about']);
+
+
+Route::get('/contact',[HomeController::class, 'contact']);
+
+
+Route::get('/store/{category?}/{item?}', function($category = null, $item = null) {
+
+    if (isset($category)){
+
+        if(isset($item)){
+              return "you are viewing the store {$category} for {$item}";
+        }
+
+
+
+            return 'you are viewing the store ' . strip_tags($category);
+    }
+
+    return 'you are viewing all instruments'; 
+
 });
 
-Route::get('/about', function() {
-    return'<h4> about page </h4>';
-});
 
-Route::get('/store', function() {
+/* Route::get('/store', function() {
 
     $category = request('category');
-    return 'you are viewing the store' . strip_tags($category);
+
+    if (isset($category)){
+            return 'you are viewing the store' . strip_tags($category);
+    }
+
+    return 'you are viewing all instruments'; 
 
 });
+ */
