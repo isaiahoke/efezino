@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Zttp\Zttp;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/weather', function () {
+    $apikey = config('services.openweathermap.key');
+    $lat = request('lat');
+    $lng = request('lng');
+
+    $response = Zttp::get("https://api.openweathermap.org/data/2.5/onecall?lat=$lat&lon=$lng&units=metric
+    exclude=hourly,daily&appid=$apikey");
+
+    return $response->json();
+}); 
