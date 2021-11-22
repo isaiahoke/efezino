@@ -12,11 +12,11 @@ class HomeController extends Controller
     }
 
     public function about() {
-    return'<h4> about page </h4>';
+    return view('about');
     }
 
      public function contact() {
-    return'<h4> Contact page </h4>';
+    return view('contact');
     }
 
 
