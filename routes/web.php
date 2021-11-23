@@ -57,3 +57,6 @@ Route::get('/store/{category?}/{item?}', function($category = null, $item = null
 
 });
  */
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
